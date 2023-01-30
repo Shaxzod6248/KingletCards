@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from products.models import *
 from users.models import *
+from checkout.models import Checkout_form
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -62,4 +63,10 @@ class ProductRetrieveSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Products
+        fields = '__all__'
+
+
+class CheckoutSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Checkout_form
         fields = '__all__'

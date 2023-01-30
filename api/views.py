@@ -9,6 +9,7 @@ from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from .serializers import ProductSerializer
 from rest_framework.generics import RetrieveAPIView
+from checkout.models import Checkout_form
 
 
 class RetrieveApiView(RetrieveAPIView):
@@ -69,3 +70,8 @@ class ContactUsViewSet(viewsets.ModelViewSet):
 class VariantsViewSet(viewsets.ModelViewSet):
     queryset = Variants.objects.all()
     serializer_class = VariantsSerializer
+
+
+class CheckoutViewSet(viewsets.ModelViewSet):
+    queryset = Checkout_form.objects.all()
+    serializer_class = CheckoutSerializer

@@ -20,8 +20,7 @@ router.register('Comments', TestimonialsViewSet)
 router.register('GetUpdate', GetUpdateViewSet)
 router.register('ContactUs', ContactUsViewSet)
 router.register('Variants', VariantsViewSet)
-
-
+router.register('Checkout_form', CheckoutViewSet)
 
 
 urlpatterns = [
