@@ -25,6 +25,7 @@ class Variants(models.Model):
     front_img = models.ImageField(upload_to='variantsimg', null=True)
     back_img = models.ImageField(upload_to='frontimgv', null=True)
 
+
     def __str__(self):
         return self.title
 
