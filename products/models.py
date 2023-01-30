@@ -24,6 +24,7 @@ class Variants(models.Model):
     title = models.CharField(max_length=200, null=True)
     front_img = models.ImageField(upload_to='variantsimg', null=True)
     back_img = models.ImageField(upload_to='frontimgv', null=True)
+    count = models.IntegerField(default=0)
 
 
     def __str__(self):
