@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'products.apps.ProductsConfig',
     'users.apps.UsersConfig',
+    'checkout.apps.CheckoutConfig',
     'rest_framework',
     'corsheaders',
     'storages',

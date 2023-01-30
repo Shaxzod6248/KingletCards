@@ -6,11 +6,25 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from django.shortcuts import render
 from rest_framework.decorators import api_view
+from rest_framework.views import APIView
+from .serializers import ProductSerializer
+from rest_framework.generics import RetrieveAPIView
+
+
+class RetrieveApiView(RetrieveAPIView):
+    serializer_class = ProductRetrieveSerializer
+    queryset = Products.objects.all()
+
+    def get_object(self, *args, **kwargs):
+        product = super().get_object(*args, **kwargs)
+        variants = Variants.objects.filter(variants_id=product.id)
+        product.variants = variants
+        return product
 
 
 class ProductsViewSet(viewsets.ModelViewSet):
     queryset = Products.objects.all()
-    serializer_class = Productserializer
+    serializer_class = ProductSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['category']
     search_fields = ['^title']
@@ -35,3 +49,23 @@ class BordersViewSet(viewsets.ModelViewSet):
 class ColorsViewSet(viewsets.ModelViewSet):
     queryset = Color.objects.all()
     serializer_class = ColorSerializer
+
+
+class TestimonialsViewSet(viewsets.ModelViewSet):
+    queryset = Testimonials.objects.all()
+    serializer_class = TestimonialsSerializer
+
+
+class GetUpdateViewSet(viewsets.ModelViewSet):
+    queryset = GetUpdate.objects.all()
+    serializer_class = GetUpdateSerializer
+
+
+class ContactUsViewSet(viewsets.ModelViewSet):
+    queryset = ContactUs.objects.all()
+    serializer_class = ContactUsSerializer
+
+
+class VariantsViewSet(viewsets.ModelViewSet):
+    queryset = Variants.objects.all()
+    serializer_class = VariantsSerializer

@@ -9,12 +9,6 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class Productserializer(serializers.ModelSerializer):
-    class Meta:
-        model = Products
-        fields = '__all__'
-
-
 class OrdersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Orders
@@ -30,4 +24,42 @@ class ColorSerializer(serializers.ModelSerializer):
 class BorderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Border
+        fields = '__all__'
+
+
+class TestimonialsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Testimonials
+        fields = '__all__'
+
+
+class GetUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GetUpdate
+        fields = '__all__'
+
+
+class ContactUsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactUs
+        fields = '__all__'
+
+
+class VariantsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Variants
+        fields = '__all__'
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Products
+        fields = '__all__'
+
+
+class ProductRetrieveSerializer(serializers.ModelSerializer):
+    variants = VariantsSerializer(many=True)
+
+    class Meta:
+        model = Products
         fields = '__all__'

@@ -19,17 +19,29 @@ class Category(models.Model):
         return self.name
 
 
+class Variants(models.Model):
+    variants = models.ForeignKey('Products', on_delete=models.CASCADE, null=True)
+    title = models.CharField(max_length=200, null=True)
+    front_img = models.ImageField(upload_to='variantsimg', null=True)
+    back_img = models.ImageField(upload_to='frontimgv', null=True)
+
+    def __str__(self):
+        return self.title
+
+
 class Products(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=300, null=True)
-    image = models.ImageField(upload_to='products', null=True)
-
+    back_image = models.ImageField(upload_to='backimgproducts', null=True)
+    front_image = models.ImageField(upload_to='frontimageproducts', null=True)
+    out_of_stock = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
 
 
 class Color(models.Model):
+    type = models.CharField(max_length=300, null=True)
     photo = models.ImageField(upload_to='colors', null=True)
     price = models.CharField(max_length=300, null=True)
 
@@ -41,6 +53,7 @@ class Orders(models.Model):
     price = models.CharField(max_length=300, null=True)
     CardHolderName = models.BooleanField(default=False)
     CardNumber = models.BooleanField(default=False)
+    BigChip = models.BooleanField(default=False)
 
 
 class Border(models.Model):
