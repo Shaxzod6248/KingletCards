@@ -33,13 +33,28 @@ class Variants(models.Model):
 
 class Products(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    title = models.CharField(max_length=300, null=True)
+    name = models.CharField(max_length=300, null=True)
     back_image = models.ImageField(upload_to='backimgproducts', null=True)
     front_image = models.ImageField(upload_to='frontimageproducts', null=True)
     out_of_stock = models.BooleanField(default=False)
+    stripe_product_id = models.CharField(max_length=100, null=True)
+    price = models.IntegerField(default=50)
+    url = models.URLField(null=True)
+
+    def get_display_price(self):
+        return "{0:.2f}".format(self.price / 100)
+
 
     def __str__(self):
-        return self.title
+        return self.name
+
+
+class Product(models.Model):
+    name = models.CharField(max_length=100)
+    stripe_product_id = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
 
 
 class Color(models.Model):

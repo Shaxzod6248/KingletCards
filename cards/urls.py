@@ -5,6 +5,14 @@ from django.conf.urls.static import static
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from rest_framework import permissions
+from products.views import (
+    CreateCheckoutSessionView,
+    ProductLandingPageView,
+    SuccessView,
+    CancelView,
+    stripe_webhook,
+    StripeIntentView
+)
 
 
 schema_view = get_schema_view(
@@ -24,6 +32,12 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
+    path('create-payment-intent/<pk>/', StripeIntentView.as_view(), name='create-payment-intent'),
+    path('webhooks/stripe/', stripe_webhook, name='stripe-webhook'),
+    path('cancel/', CancelView.as_view(), name='cancel'),
+    path('success/', SuccessView.as_view(), name='success'),
+    path('', ProductLandingPageView.as_view(), name='landing-page'),
+    path('create-checkout-session/<pk>', CreateCheckoutSessionView.as_view(), name='create-checkout-session'),
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
